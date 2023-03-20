@@ -1,0 +1,23 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = []
+dependencies = [
+    "python-telegram-bot>=20.1",
+]
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "mypy>=1.1.1",
+    "ruff>=0.0.257",
+]
+
+[tool.pdm.scripts]
+start = { cmd = "python src", env_file = ".env" }
+mypy = "mypy src --strict"
+ruff = "ruff check src"
+check = { composite = ["mypy", "ruff"] }
+dev = { composite = ["check", "start"] }
