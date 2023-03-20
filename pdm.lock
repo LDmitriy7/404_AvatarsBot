@@ -12,6 +12,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "botty"
+version = "0.1.0"
+requires_python = ">=3.11"
+path = "./botty"
+summary = ""
+dependencies = [
+    "python-telegram-bot>=20.1",
+]
+
+[[package]]
 name = "certifi"
 version = "2022.12.7"
 requires_python = ">=3.6"
@@ -146,7 +156,7 @@ summary = "Backported and Experimental Type Hints for Python 3.7+"
 
 [metadata]
 lock_version = "4.1"
-content_hash = "sha256:1a91574a19c8917886ac282bfb7f91fff35de0712143afa2d15254d8a57e11be"
+content_hash = "sha256:1dd335a2826c9fea60a5b1a4593c015472ee5d95360b12253cedba36bd39885f"
 
 [metadata.files]
 "anyio 3.6.2" = [
