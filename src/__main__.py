@@ -1,17 +1,5 @@
-import os
+from botty import app
 
-from app import App
-from handler import Handler
+from handlers import HANDLERS
 
-TOKEN = os.environ["BOT_TOKEN"]
-
-
-class StartHandler(Handler):
-    on_command = "start"
-
-    async def callback(self) -> None:
-        await self.reply("Hello")
-
-
-app = App(TOKEN)
-app.run([StartHandler])
+app.run(HANDLERS)

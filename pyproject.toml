@@ -4,7 +4,7 @@ version = ""
 description = ""
 authors = []
 dependencies = [
-    "botty @ file:///${PROJECT_ROOT}/botty",
+    "telegram-botty>=0.1.1",
 ]
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -13,11 +13,23 @@ license = { text = "MIT" }
 dev = [
     "mypy>=1.1.1",
     "ruff>=0.0.257",
+    "black>=23.1.0",
 ]
 
 [tool.pdm.scripts]
 start = { cmd = "python src", env_file = ".env" }
-mypy = "mypy src --strict"
+black = "black src"
 ruff = "ruff check src"
-check = { composite = ["mypy", "ruff"] }
-dev = { composite = ["check", "start"] }
+mypy = "mypy src --strict"
+lint = { composite = ["black", "ruff", "mypy"] }
+dev = { composite = ["lint", "start"] }
+
+[tool.ruff]
+select = ["ALL"]
+ignore = ["D", "ANN101", "ANN102", "RUF001"]
+src = ["src"]
+fix = true
+show-fixes = true
+
+[tool.isort]
+profile = "black"
