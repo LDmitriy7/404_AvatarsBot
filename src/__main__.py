@@ -1,5 +1,5 @@
 from botty import app
 
-from handlers import HANDLERS
+from handler import handler
 
-app.run(HANDLERS)
+app.run(handler)

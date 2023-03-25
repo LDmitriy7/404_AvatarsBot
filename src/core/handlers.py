@@ -1,35 +1,31 @@
-from typing import Never
-
 import botty
-from botty.handlers.classes.update import UpdateFieldError
-from botty.handlers.types import ReplyMarkup
+from telegram import ext
 
-from .classes import Bot, Chat, User
+
+class CommandHandler(botty.CommandHandler):
+    reply_text: str
+
+    def __init__(self, command: str, text: str) -> None:
+        self.reply_text = text
+        super().__init__(command)
 
 
 class StartHandler(botty.StartHandler):
     reply_text: str
-    reply_markup: ReplyMarkup | None = None
+    reply_keyboard: botty.InlineKeyboard
+
+    def __init__(self, text: str) -> None:
+        self.reply_text = text
+        super().__init__()
 
     async def callback(self) -> None:
-        self._validate_field("reply_text")
-        await self.reply(self.reply_text, self.reply_markup)
+        self.reply_markup = self.reply_keyboard.build()
+        await super().callback()
 
-    @property
-    def chat(self) -> Chat:
-        return Chat(self.message.chat)
 
-    @property
-    def user(self) -> User:
-        raw = self.message.from_user
-        if raw is None:
-            self._raise_field_error("user")
-        return User(raw)
+class StartGroupHandler(botty.StartHandler):
+    filters = botty.StartHandler.filters & ext.filters.ChatType.GROUPS
 
-    def _raise_field_error(self, field: str) -> Never:
-        raise UpdateFieldError(self.update, field)
-
-    @property
-    def bot(self) -> Bot:
-        raw = self.context.bot
-        return Bot(raw)
+    def __init__(self, text: str) -> None:
+        self.reply_text = text
+        super().__init__()

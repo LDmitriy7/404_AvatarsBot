@@ -4,32 +4,28 @@ version = ""
 description = ""
 authors = []
 dependencies = [
-    "telegram-botty>=0.1.1",
+    "telegram-botty>=0.1.3",
 ]
 requires-python = ">=3.11"
 license = { text = "MIT" }
 
 [tool.pdm.dev-dependencies]
 dev = [
-    "mypy>=1.1.1",
-    "ruff>=0.0.257",
-    "black>=23.1.0",
+    "stricter>=0.1.3",
 ]
+
+[tool.pyright]
+typeCheckingMode = "strict"
 
 [tool.pdm.scripts]
 start = { cmd = "python src", env_file = ".env" }
-black = "black src"
-ruff = "ruff check src"
-mypy = "mypy src --strict"
-lint = { composite = ["black", "ruff", "mypy"] }
+lint = "python -m stricter"
 dev = { composite = ["lint", "start"] }
 
 [tool.ruff]
-select = ["ALL"]
-ignore = ["D", "ANN101", "ANN102", "RUF001"]
 src = ["src"]
-fix = true
-show-fixes = true
+select = ["ALL"]
+ignore = ["D", "ANN101", 'ANN102']
 
 [tool.isort]
 profile = "black"
