@@ -1,4 +1,3 @@
-from .assets import Keyboard
 from .handler import handler
 
-__all__ = ["Keyboard", "handler"]
+__all__ = ["handler"]

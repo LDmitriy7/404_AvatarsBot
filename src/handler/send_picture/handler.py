@@ -1,5 +1,7 @@
-import commands
-from core import CommandHandler
-from loader import texts
+from botty import CommandHandler
 
-handler = CommandHandler(commands.SEND_PICTURE, texts[21])
+import commands
+
+from .assets import Texts
+
+handler = CommandHandler(commands.SEND_PICTURE, Texts.does_not_work)

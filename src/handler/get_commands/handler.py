@@ -4,15 +4,14 @@ import commands
 from assets import PictureCategory
 
 
-class _Handler(CommandHandler):
-    def __init__(self, category: str, command: str) -> None:
-        self.reply_text = category
-        super().__init__(command)
+class Handler(CommandHandler):
+    def __init__(self, command: str, category: str) -> None:
+        super().__init__(command, category)
 
 
 handler = CompositeHandler(
-    _Handler(PictureCategory.AVATAR, commands.GET_AVATARS),
-    _Handler(PictureCategory.PAIRED_AVATARS, commands.GET_PAIRED),
-    _Handler(PictureCategory.CUTE, commands.GET_CUTE),
-    _Handler(PictureCategory.ANGRY, commands.GET_ANGRY),
+    Handler(commands.GET_AVATARS, PictureCategory.AVATAR),
+    Handler(commands.GET_PAIRED, PictureCategory.PAIRED_AVATARS),
+    Handler(commands.GET_CUTE, PictureCategory.CUTE),
+    Handler(commands.GET_ANGRY, PictureCategory.ANGRY),
 )

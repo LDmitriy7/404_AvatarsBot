@@ -12,7 +12,8 @@ class PictureHandler(QueryHandler):
         await self.answer(self.category)
 
 
-avatar_handler = PictureHandler(PictureCategory.AVATAR)
-paired_avatars_handler = PictureHandler(PictureCategory.PAIRED_AVATARS)
-cute_picture_handler = PictureHandler(PictureCategory.CUTE)
-angry_picture_handler = PictureHandler(PictureCategory.ANGRY)
+class Subhandlers:
+    AVATAR = PictureHandler(PictureCategory.AVATAR)
+    PAIRED_AVATARS = PictureHandler(PictureCategory.PAIRED_AVATARS)
+    CUTE_PICTURE = PictureHandler(PictureCategory.CUTE)
+    ANGRY_PICTURE = PictureHandler(PictureCategory.ANGRY)

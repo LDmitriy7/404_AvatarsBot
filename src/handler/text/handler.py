@@ -1,17 +1,15 @@
 from botty import TextHandler
 
-from .assets import TRIGGERS_TO_CATEGORY
+from .assets import TRIGGERS
 
 
-class _Handler(TextHandler):
-    async def callback(self) -> None:
-        words = self.text.lower().split()
-
-        for triggers, category in TRIGGERS_TO_CATEGORY:
-            for word in words:
+class Handler(TextHandler):
+    def get_reply_text(self) -> str | None:
+        for word in self.text_words:
+            for category, triggers in TRIGGERS.items():
                 if word in triggers:
-                    await self.reply(category)
-                    break
+                    return category
+        return None
 
 
-handler = _Handler()
+handler = Handler()
