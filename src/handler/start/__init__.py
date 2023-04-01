@@ -1,8 +1,8 @@
 from botty import CompositeHandler
 
-from . import entry, menu
+from . import menu, start
 
 handler = CompositeHandler(
-    entry.handler,
+    start.handler,
     menu.handler,
 )

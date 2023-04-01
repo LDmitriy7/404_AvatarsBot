@@ -26,7 +26,11 @@ dev = { composite = ["lint", "start"] }
 [tool.ruff]
 src = ["src"]
 select = ["ALL"]
-ignore = ["D", "ANN101", 'ANN102']
+ignore = ["D", "ANN101", "ANN102"]
+exclude = ["_src"]
+
+[tool.mypy]
+exclude = ["_src"]
 
 [tool.isort]
 profile = "black"
