@@ -12,3 +12,6 @@ GROUP_WELCOME = texts[4].format(
 )
 DOES_NOT_WORK = texts[21]
 ADMIN_PANEL = texts[14]
+ASK_POST = texts[17]
+BROADCAST_START = texts[19]
+STARTING_BROADCAST = texts[22]

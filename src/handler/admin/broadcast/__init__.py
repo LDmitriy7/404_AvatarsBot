@@ -1,5 +1,14 @@
 from core import ConversationHandler
+from lib import keys
 
-from .subhandlers import entry_handler
+from . import broadcast, cancel, confirm, post
 
-handler = ConversationHandler("broadcast", entry_handler, states={})
+handler = ConversationHandler(
+    key=keys.BROADCAST,
+    entry_point=broadcast.handler,
+    states={
+        keys.POST: post.handler,
+        keys.CONFIRM: confirm.handler,
+    },
+    fallback=cancel.handler,
+)

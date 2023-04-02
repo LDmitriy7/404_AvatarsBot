@@ -19,16 +19,16 @@ def listify(obj: ObjectT | None) -> ObjectT | list[ObjectT]:
 class ConversationHandler(ext.ConversationHandler[PTBContext]):
     def __init__(
         self,
-        key: str,
+        key: int,
         entry_point: PTBHandler | list[PTBHandler],
-        states: Mapping[object, PTBHandler | list[PTBHandler]],
+        states: Mapping[int, PTBHandler | list[PTBHandler]],
         fallback: PTBHandler | list[PTBHandler] | None = None,
     ) -> None:
         entry_points = cast(list[PTBHandler], listify(entry_point))
         fallbacks = cast(list[PTBHandler], listify(fallback))
 
         _states = {
-            state: cast(list[PTBHandler], listify(handler))
+            cast(object, state): cast(list[PTBHandler], listify(handler))
             for state, handler in states.items()
         }
 
@@ -37,6 +37,6 @@ class ConversationHandler(ext.ConversationHandler[PTBContext]):
             _states,
             fallbacks,
             allow_reentry=True,
-            name=key,
-            persistent=False,
+            name=str(key),
+            persistent=True,
         )

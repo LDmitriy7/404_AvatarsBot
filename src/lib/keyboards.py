@@ -1,4 +1,7 @@
-from botty import CallbackButton, InlineKeyboard, UrlButton, texts
+from botty import CallbackButton, InlineKeyboard, ReplyKeyboard, UrlButton, texts
+
+CANCEL_BUTTON = CallbackButton(texts[18])
+CONFIRM_BUTTON = CallbackButton(texts[20])
 
 
 class MenuKeyboard(InlineKeyboard):
@@ -13,7 +16,8 @@ class MenuKeyboard(InlineKeyboard):
     ]
 
     def __init__(self, startgroup_url: str) -> None:
-        super().__init__(*self.buttons, [UrlButton(texts[9], startgroup_url)])
+        footer = [UrlButton(texts[9], startgroup_url)]
+        super().__init__(*self.buttons, footer)
 
 
 class AdminKeyboard(InlineKeyboard):
@@ -25,5 +29,20 @@ class AdminKeyboard(InlineKeyboard):
         [REQUIRED_JOIN],
     ]
 
-    def __init__(self) -> None:
-        super().__init__(*self.buttons)
+
+class CancelKeyboard(InlineKeyboard):
+    buttons = [[CANCEL_BUTTON]]
+
+
+class ConfirmKeyboard(InlineKeyboard):
+    buttons = [
+        [CONFIRM_BUTTON],
+        [CANCEL_BUTTON],
+    ]
+
+
+class PictureKeyboard(ReplyKeyboard):
+    GET_ANOTHER = texts[23]
+    MAIN_MENU = texts[24]
+
+    buttons = [[GET_ANOTHER, MAIN_MENU]]
